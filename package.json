@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "migrate": "node_modules/.bin/ts-node ./src/db/migrate.js",
     "test": "mocha --timeout 10000 -- tests/**/*.js",
     "test:clean": "rimraf .nyc_output coverage",
     "test:report": "nyc npm test",
@@ -79,7 +80,10 @@
     "request": "^2.84.0",
     "request-ip": "^2.0.2",
     "sequelize": "^4.38.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5",
     "uid2": "^0.0.3",
+    "umzug": "^2.3.0",
     "winston": "^2.4.0",
     "winston-graylog2": "^0.7.1"
   },
