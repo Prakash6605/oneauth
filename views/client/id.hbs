@@ -1,70 +1,146 @@
-{{!< centercolumn}}
-<div class="offset-md-4 col-md-8 c-client-add">
-    <div class="card">
-        <h1 class="heading-u-red">Details for {{client.name}}</h1>
-            <div class="attributes d-flex flex-column">
-                    <div class="row no-gutters align-items-center justify-content-between detail-row">
-                        <div class="label-input col-md-4 col-sm-3">Client Name</div>
-                        <input type="text" class="input-text col-8" value="{{client.name}}" disabled/>
-                    </div>
-                <div class="row justify-content-between">
-                    <div class="row no-gutters align-items-center justify-content-between detail-row">
-                        <div class="label-input col-md-4 col-sm-3">Client ID</div>
-                        <input type="text" class="input-text col-8" value="{{client.id}}" disabled/>
-                    </div>
+<style>
+      input[type="text"]:disabled{background-color:transparent;}
 
-                    <div class="row no-gutters align-items-center justify-content-between detail-row">
-                        <div class="label-input col-md-4 col-sm-3">Client Secret</div>
-                        <input type="text" class="input-text col-8" value="{{client.secret}}" disabled/>
-                    </div>
-                </div>
+  </style>
+{{!-- {{!< centercolumn}} {{!-- class="offset-md-4 col-md-8 c-client-add" --}} 
+<div class="col-md-9 py-5 work-area__main-area">
+  <div class="card">
+    {{!-- making chnages here in line 5 h1 was there instead of h4--}}
+    {{!-- <h4 class="heading-u-red">Details for {{client.name}}</h4> --}}
+    {{!-- <style>
+      input[type="text"]:disabled{background-color:transparent;}
 
-                <div class="row justify-content-between">
-                  {{#each client.domain as |domain|}}
-                    <div class="row no-gutters align-items-center justify-content-between detail-row">
-                        <div class="label-input col-md-4 col-sm-3">Domain</div>
-                        <input type="text" class="input-text col-8" value="{{domain}}" disabled/>
-                    </div>
-                  {{/each}}
-                </div>
+    </style> --}}
+    <div class="attributes d-flex flex-column">
+      {{!-- add1 --}}
+      <div class="row justify-content-between">
+        <div class="row no-gutters align-items-center justify-content-between detail-row">
+          <h4>Details for {{client.name}}</h4>
 
-                <div class="row justify-content-between">
-                  {{#each client.callbackURL as |callback|}}
-                    <div class="row no-gutters align-items-center justify-content-between detail-row">
-                        <div class="label-input col-md-4 col-sm-3">CallBack Url</div>
-                        <input type="text" class="input-text col-8" value="{{callback}}" disabled/>
-                    </div>
-                  {{/each}}
-                </div>
-
-                <div class="row justify-content-between">
-                  <div class="row no-gutters align-items-center justify-content-between detail-row">
-                      <div class="label-input col-md-4 col-sm-3">Default Url</div>
-                      <input type="text" class="input-text col-8" value="{{client.defaultURL}}" disabled/>
-                  </div>
-
-                  {{#ifeq val=userRole expected="admin"}}
-                      <div class="row no-gutters align-items-center justify-content-between detail-row">
-                          <div class="label-input col-md-4 col-sm-3">Trusted Client</div>
-                          <input type="checkbox" class="input-checkbox col-7" {{#if client.trusted}} checked {{/if}} disabled/>
-                      </div>
-                  {{/ifeq}}
-                </div>
-
-                <br>
-                <div class="row justify-content-end">
-                  <div class="reset-button mr-5">
-                    <a class="grey" href="/users/me/clients/">
-                      <button>BACK </button>
-                    </a>
-                  </div>
-
-                  <div class="button-solid">
-                    <a class="white" href="/clients/{{client.id}}/edit/">
-                      <button>EDIT CLIENT</button>
-                    </a>
-                  </div>
-              </div>
-          </div>
+        </div>
       </div>
-</div>
+      
+      {{!-- first row --}}
+      <div class="row">
+        <div class="col-lg-6 mt-5">
+          <div class="row align-items-center">
+            <div class="col-4">
+              <label for="addtype" class="font-sm">Client Name</label>
+            </div>
+            <div class="col-8">
+              <input type="text" name="clientname" value="{{client.name}}"
+                class="underline-input pb-4 font-sm bold w-100" placeholder="Client Name" disabled />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 mt-5">
+          <div class="row align-items-center">
+            <div class="col-4">
+              <label for="addtype" class="font-sm">Client ID</label>
+            </div>
+            <div class="col-8">
+              <input type="text" name="domain" value="{{client.id}}" class="underline-input pb-4 font-sm bold w-100"
+                placeholder="Domain" disabled />
+            </div>
+          </div>
+        </div>
+      </div>
+      {{!-- first row ends testing partially done--}}
+
+      {{!-- second row --}}
+      <div class="row">
+        <div class="col-lg-6 mt-5">
+          <div class="row align-items-center">
+            <div class="col-4">
+              <label for="addtype" class="font-sm">Client Secret</label>
+            </div>
+            <div class="col-8">
+              <input type="text" name="callback" value="{{client.secret}}"
+                class="underline-input pb-4 font-sm bold w-100" placeholder="Callback URL" /disabled>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-6 mt-5">
+          <div class="row align-items-center">
+            {{#each client.domain as |domain|}}
+            <div class="col-4">
+              <label for="addtype" class="font-sm">Domain</label>
+            </div>
+            <div class="col-8">
+              <input type="text" name="defaulturl" value="{{domain}}" class="underline-input pb-4 font-sm bold w-100"
+                placeholder="Default URL" /disabled>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+      {{!-- second row testing --}}
+
+      {{!-- third row --}}
+      <div class="row">
+
+        <div class="col-lg-6 mt-5">
+          {{#each client.callbackURL as |callback|}}
+          <div class="row align-items-center">
+
+            <div class="col-4">
+              <label class="font-sm">CallBack Url</label>
+            </div>
+            <div class="col-8">
+              <input type="text" maxlength="11" class="underline-input pb-4 font-sm bold w-100"
+                placeholder="OTP Hash for Android" name="androidOTPHash" value="{{callback}}" disabled />
+            </div>
+          </div>
+          {{/each}}
+        </div>
+
+        <div class="col-lg-6 mt-5">
+          <div class="row align-items-center">
+            <div class="col-4">
+              <label for="addtype" class="font-sm">Default Url</label>
+            </div>
+            <div class="col-8">
+              <input type="text" name="webhookurl" value="{{client.defaultURL}}"
+                class="underline-input pb-4 font-sm bold w-100" placeholder="Webhook URL" disabled />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="row">
+
+        <div class="col-lg-6 mt-5">
+          {{#ifeq val=userRole expected="admin"}}
+          <div class="row align-items-center">
+            <div class="col-4">
+              <label for="addtype" class="font-sm">Trusted Client</label>
+            </div>
+            <div class="col-8">
+              <input type="checkbox" class="input-checkbox col-7" {{#if client.trusted}} checked {{/if}} disabled/>
+              
+            </div>
+          </div>
+          {{/ifeq}}
+        </div>
+      </div>
+
+      <br>
+      <div class="row justify-content-end">
+        <div class="reset-button mr-5">
+          <a class="grey" href="/users/me/clients/">
+            <button class="button-solid button-orange lg
+">BACK </button>
+          </a>
+        </div>
+
+        <div class="button-solid button-orange lg">
+          <a class="white" href="/clients/{{client.id}}/edit/">
+            <button>EDIT CLIENT</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
